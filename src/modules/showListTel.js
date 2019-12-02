@@ -6,10 +6,10 @@
   headerContactsArrow.addEventListener('click', () => {
     if (!telContacts.style.opacity || telContacts.style.opacity === '0') {
       telContacts.style.opacity = '1';
-      telContacts.style.marginTop = '20px';
+      telContacts.style.marginTop = '23px';
     } else {
-      telContacts.style.opacity = '0';
-      telContacts.style.marginTop = '0px';
+      telContacts.style.opacity = '';
+      telContacts.style.marginTop = '';
     }
   });
 };

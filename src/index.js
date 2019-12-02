@@ -11,6 +11,9 @@ import 'fetch-polyfill';
 
 import showListTel from './modules/showListTel.js';
 import toggleMenu from './modules/toggleMenu.js';
+import showRepairAndPrivacy from './modules/showRepairAndPrivacy.js';
+
 
 showListTel();
 toggleMenu();
+showRepairAndPrivacy();
