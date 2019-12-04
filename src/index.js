@@ -14,7 +14,9 @@ import toScrollingAnchor from './modules/toScrollingAnchor.js';
 import maskPhone from './modules/maskPhone.js';
 import toggleMenu from './modules/toggleMenu.js';
 import showRepairAndPrivacy from './modules/showRepairAndPrivacy.js';
-import tabs from './modules/tabs.js';
+import slider from './modules/slider.js';
+import tabsOne from './modules/tabsOne.js';
+import tabsTwo from './modules/tabsTwo.js';
 
 
 showListTel();
@@ -22,4 +24,5 @@ toScrollingAnchor();
 maskPhone();
 toggleMenu();
 showRepairAndPrivacy();
-tabs();
+tabsOne();
+tabsTwo(slider);
