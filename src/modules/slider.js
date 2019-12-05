@@ -1,7 +1,5 @@
 const slider = (element) => {
-  const arrowLeft = document.getElementById('repair-types-arrow_left'),
-        arrowRight = document.getElementById('repair-types-arrow_right'),
-        slide = element.querySelectorAll('.repair-types-slider__slide'),
+  const slide = element.querySelectorAll('.repair-types-slider__slide'),
         sliderCounterContentTotal = document.querySelector('.slider-counter-content__total'),//max count
         sliderCounterContentCurrent = document.querySelector('.slider-counter-content__current');//текущий
   
@@ -12,10 +10,10 @@ const slider = (element) => {
   document.body.addEventListener('click', (event) => {
     let target = event.target;
 
-    if (target === arrowRight) {
+    if (target.closest('#repair-types-arrow_right')) {
       slideIndex++;
     }
-    if (target === arrowLeft) {
+    if (target.closest('#repair-types-arrow_left')) {
       slideIndex--;
     }
     if (slideIndex < 0) {

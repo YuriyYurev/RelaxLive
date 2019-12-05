@@ -15,8 +15,13 @@ import maskPhone from './modules/maskPhone.js';
 import toggleMenu from './modules/toggleMenu.js';
 import showRepairAndPrivacy from './modules/showRepairAndPrivacy.js';
 import slider from './modules/slider.js';
-import tabsOne from './modules/tabsOne.js';
-import tabsTwo from './modules/tabsTwo.js';
+import repairTypes from './modules/repairTypes.js';
+import showTransparency from './modules/showTransparency.js';
+import showDesign from './modules/showDesign.js';
+import sliderReviews from './modules/sliderReviews.js';
+import showTabScheme from './modules/showTabScheme.js';
+import accordion from './modules/accordion.js';
+import sliderCarouselPartners from './modules/sliderCarouselPartners.js';
 
 
 showListTel();
@@ -24,5 +29,10 @@ toScrollingAnchor();
 maskPhone();
 toggleMenu();
 showRepairAndPrivacy();
-tabsOne();
-tabsTwo(slider);
+repairTypes(slider);
+showTransparency();
+showDesign();
+sliderReviews();
+showTabScheme();
+accordion();
+sliderCarouselPartners();
