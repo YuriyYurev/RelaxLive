@@ -1,8 +1,10 @@
 const showTabScheme = () => {
   const scheme = document.getElementById('scheme-list'),
+        schemeParrent = document.getElementById('scheme'),
         tabItem = document.querySelectorAll('.scheme-nav__item'),
         schemeDescriptionBlock = document.querySelectorAll('.scheme-description-block'),
         schemeSliderSlide = document.querySelectorAll('.scheme-slider__slide');
+        let wdthTranslate = 0;
 
   scheme.addEventListener('click', (event) => {
     let target = event.target;
@@ -28,6 +30,31 @@ const showTabScheme = () => {
         item.classList.remove('active');
       }
     });
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (document.documentElement.clientWidth > 1135) {
+      wdthTranslate = 0;
+      scheme.style.transform = '';
+    }
+  });
+
+  schemeParrent.addEventListener('click', (event) => {
+    let target = event.target;
+
+    if ( (document.documentElement.offsetWidth - scheme.getBoundingClientRect().right) < 60) {
+      if (target.closest('#nav-arrow-scheme_right')) {
+        wdthTranslate -= 10;
+        scheme.style.transform = `translateX(${wdthTranslate}%)`;
+        }
+    }
+    if (target.closest('#nav-arrow-scheme_left')) {
+      wdthTranslate += 10;
+      if (wdthTranslate > 0) {
+        wdthTranslate = 0;
+      }
+      scheme.style.transform = `translateX(${wdthTranslate}%)`;
     }
   });
 };

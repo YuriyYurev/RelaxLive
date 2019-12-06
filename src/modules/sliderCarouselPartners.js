@@ -1,36 +1,46 @@
 const sliderCarouselPartners = () => {
-  const partners = document.getElementById('partners'),
-  partnersSliderSlide = partners.querySelectorAll('.partners-slider__slide');
+  const partnersSlider = document.querySelector('.partners-slider'),
+      partnersWrapper = document.querySelector('.partners>.wrapper'),
+      partnersSliderSlide = document.querySelectorAll('.partners-slider__slide');
+      let percent = 33;
 
-  let slideIndex = 0;
-  
-  const hideSlide = (a) => {
-    for (let i = 0; i < partnersSliderSlide.length; i++) {
-      if (i === a) {
-        partnersSliderSlide[i].style.display = '';
-      } else {
-        partnersSliderSlide[i].style.display = 'none';
+  const carousel = () => {
+    partnersSlider.style.display = 'flex';
+    partnersWrapper.style.overflow = 'hidden';
+    partnersSlider.style.justifyContent = 'space-around';
+    partnersSlider.style.transform = `translateX(${percent}%)`;
+
+    partnersSliderSlide.forEach(item => {
+      item.style.flex = `0 0 ${percent}%`;
+      item.style.margin = '0 auto';
+    });
+    let widthSlide = partnersSliderSlide[0].clientWidth;
+    partnersWrapper.addEventListener('click', (event) => {
+      let target = event.target;
+
+      if (target.closest('#partners-arrow_right')) {
+        widthSlide -= partnersSliderSlide[0].clientWidth;
+        if (widthSlide < -partnersSliderSlide[0].clientWidth) {
+          widthSlide = partnersSliderSlide[0].clientWidth;
+        }
+        partnersSlider.style.transform = `translateX(${widthSlide}px)`;
       }
-    }
+      if (target.closest('#partners-arrow_left')) {
+        widthSlide += partnersSliderSlide[0].clientWidth;
+        if (widthSlide > partnersSliderSlide[0].clientWidth) {
+          widthSlide = -partnersSliderSlide[0].clientWidth;
+        }
+        partnersSlider.style.transform = `translateX(${widthSlide}px)`;
+      }
+    });
   };
-  hideSlide(0);
+  carousel();
 
-  partners.addEventListener('click', (event) => {
-    let target = event.target;
-
-    if (target.closest('#partners-arrow_right')) {
-      slideIndex++;
+  window.addEventListener('resize', ()=> {
+    if (document.documentElement.clientWidth < 769) {
+      console.log('hello');
     }
-    if (target.closest('#partners-arrow_left')) {
-      slideIndex--;
-    }
-    if (slideIndex > partnersSliderSlide.length - 1) {
-      slideIndex = 0;
-    }
-    if (slideIndex < 0) {
-      slideIndex = partnersSliderSlide.length - 1;
-    }
-    hideSlide(slideIndex);
   });
+
 };
 export default sliderCarouselPartners;

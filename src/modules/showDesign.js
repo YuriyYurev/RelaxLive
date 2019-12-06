@@ -2,7 +2,10 @@ const showDesign = () => {
   const designs = document.getElementById('designs'),
   designsNavItem = designs.querySelectorAll('.designs-nav__item'),
   previewBlock = designs.querySelectorAll('.preview-block'),
-  designsSliderStyleOne = designs.querySelector('.designs-slider__style1');
+  designsSliderStyleOne = designs.querySelector('.designs-slider__style1'),
+  designsList = document.getElementById('designs-list');
+  console.log(designsList);
+  let wdthTranslate = 0;
 
   const tabPreviewBlock = (slide, preview) => {
     let slideIdex = 0;
@@ -49,6 +52,31 @@ const showDesign = () => {
           item.classList.remove('active');
         }
       });
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (document.documentElement.clientWidth > 1135) {
+      wdthTranslate = 0;
+      designsList.style.transform = '';
+    }
+  });
+
+  designs.addEventListener('click', (event) => {
+    let target = event.target;
+
+    if ( (document.documentElement.offsetWidth - designsList.getBoundingClientRect().right) < 10) {
+      if (target.closest('#nav-arrow-designs_right')) {
+        wdthTranslate -= 20;
+        designsList.style.transform = `translateX(${wdthTranslate}%)`;
+        }
+    }
+    if (target.closest('#nav-arrow-designs_left')) {
+      wdthTranslate += 20;
+      if (wdthTranslate > 0) {
+        wdthTranslate = 0;
+      }
+      designsList.style.transform = `translateX(${wdthTranslate}%)`;
     }
   });
 };
