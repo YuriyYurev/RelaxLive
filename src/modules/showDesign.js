@@ -3,8 +3,10 @@ const showDesign = () => {
   designsNavItem = designs.querySelectorAll('.designs-nav__item'),
   previewBlock = designs.querySelectorAll('.preview-block'),
   designsSliderStyleOne = designs.querySelector('.designs-slider__style1'),
-  designsList = document.getElementById('designs-list');
-  console.log(designsList);
+  designsList = document.getElementById('designs-list'),
+  linkListDesigns = document.querySelector('.link-list-designs'),
+  popupDialogDesign = document.querySelector('.popup-dialog-design');
+
   let wdthTranslate = 0;
 
   const tabPreviewBlock = (slide, preview) => {
@@ -52,6 +54,11 @@ const showDesign = () => {
           item.classList.remove('active');
         }
       });
+    }
+    if (target.closest('.link-list-designs a')) {
+      popupDialogDesign.style.visibility = 'visible';
+    } else {
+      popupDialogDesign.style.visibility = '';
     }
   });
 

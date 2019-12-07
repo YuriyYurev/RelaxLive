@@ -38,7 +38,6 @@ const sliderCarouselPartners = () => {
 
   window.addEventListener('resize', ()=> {
     if (document.documentElement.clientWidth < 769) {
-      console.log('hello');
     }
   });
 

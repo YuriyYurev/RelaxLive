@@ -4,8 +4,20 @@ const showTransparency = () => {
   transparencyItemImg = document.querySelectorAll('.transparency-item__img'),
   popupTransparencySliderSlide = document.querySelectorAll('.popup-transparency-slider__slide'),
   sliderCounterContentCurrent = popupTransparency.querySelector('.slider-counter-content__current'),
-  sliderCounterContentTCotal = popupTransparency.querySelector('.slider-counter-content__total');
+  sliderCounterContentTCotal = popupTransparency.querySelector('.slider-counter-content__total'),
+  transparencySlider = transparency.querySelector('.transparency-slider'),
+  transparencyItem = transparency.querySelectorAll('.transparency-item'),
+  leftArrow = document.getElementById('transparency-arrow_left'),
+  rightArrow = document.getElementById('transparency-arrow_right');
+  let slideIndex = 0;
   
+  const hideTransparencyItem = (a) => {
+    for (let i = 0; i < transparencyItem.length; i++) {
+      transparencyItem[i].style.display = 'none';
+    }
+    transparencyItem[a].style.display = '';
+  };
+
   sliderCounterContentTCotal.textContent = popupTransparencySliderSlide.length;
   transparency.addEventListener('click', (event) => {
     let slideIndex = 0;
@@ -58,5 +70,33 @@ const showTransparency = () => {
       sliderCounterContentCurrent.textContent = slideIndex + 1;
     });
   });
+
+  window.addEventListener('resize', () => {
+
+    if (document.documentElement.offsetWidth > 1090) {
+      transparencyItem.forEach(item => {
+        item.style.display = '';
+      });
+    } else {
+      slideIndex = 0;
+      hideTransparencyItem(slideIndex);
+    }
+  });
+
+  leftArrow.addEventListener('click', () => {
+    slideIndex--;
+    if (slideIndex < 0) {
+      slideIndex = 0;
+    }
+    hideTransparencyItem(slideIndex);
+  });
+  rightArrow.addEventListener('click', () => {
+    slideIndex++;
+    if (slideIndex > 2) {
+      slideIndex = 2;
+    }
+    hideTransparencyItem(slideIndex);
+  });
+  
 };
 export default showTransparency;
