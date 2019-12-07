@@ -10,6 +10,7 @@ import 'es6-promise';
 import 'fetch-polyfill';
 
 import showListTel from './modules/showListTel.js';
+import getConsultation from './modules/getConsultation.js';
 import toScrollingAnchor from './modules/toScrollingAnchor.js';
 import maskPhone from './modules/maskPhone.js';
 import toggleMenu from './modules/toggleMenu.js';
@@ -28,6 +29,7 @@ import sliderCarouselPartners from './modules/sliderCarouselPartners.js';
 
 
 showListTel();
+getConsultation();
 toScrollingAnchor();
 maskPhone();
 toggleMenu();

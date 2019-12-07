@@ -33,8 +33,6 @@ const sliderPortfolio = () => {
   arrowPopupLeft = document.getElementById('popup_portfolio_left'),
   arrowPopupRight = document.getElementById('popup_portfolio_right'),
   popupPortfolioCounter = document.getElementById('popup-portfolio-counter');//Счётчик
-  console.log(popupPortfolioSliderSlide.length);
-
 
   let indexMainPopup = 0;
   sliderCounterContentTotal.textContent = popupPortfolioText.length;
