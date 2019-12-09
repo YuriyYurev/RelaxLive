@@ -4,8 +4,10 @@ const showDesign = () => {
   previewBlock = designs.querySelectorAll('.preview-block'),
   designsSliderStyleOne = designs.querySelector('.designs-slider__style1'),
   designsList = document.getElementById('designs-list'),
-  linkListDesigns = document.querySelector('.link-list-designs'),
-  popupDialogDesign = document.querySelector('.popup-dialog-design');
+  popupDesign = document.querySelector('.popup-design'),
+  designCounter = document.getElementById('designs-counter'),
+  counterTotal = designCounter.querySelector('.slider-counter-content__total'),
+  counterCurrent = designCounter.querySelector('.slider-counter-content__current');
 
   let wdthTranslate = 0;
 
@@ -14,6 +16,9 @@ const showDesign = () => {
 
     const designsSliderStyleItem = slide.querySelectorAll('.designs-slider__style-slide'),
     previewItem = preview.querySelectorAll('.preview-block__item-inner');
+
+    counterTotal.textContent = previewItem.length;
+    slide.style.transition = 'transform 0.5s';
     for (let i = 0; i < previewItem.length; i++) {
       previewItem[i].classList.remove('preview_active');
       designsSliderStyleItem[slideIdex].style.display = '';
@@ -31,6 +36,32 @@ const showDesign = () => {
           designsSliderStyleItem[index].style.display = 'none';
         }
       });
+
+    });
+    designs.addEventListener('click', (event) => {
+      let target = event.target;
+      if (target.closest('#design_right')) {
+        slideIdex++;
+        if (slideIdex > designsSliderStyleItem.length - 1) {
+          slideIdex = designsSliderStyleItem.length - 1;
+        }
+        slide.style.transform = `translateY(-${designsSliderStyleItem[0].clientHeight * slideIdex}px)`;
+
+      }
+      if (target.closest('#design_left')) {
+        slideIdex--;
+        if (slideIdex < 0) {
+          slideIdex = 0;
+        }
+        slide.style.transform = `translateY(-${designsSliderStyleItem[0].clientHeight * slideIdex}px)`;
+
+      }
+      counterCurrent.textContent = slideIdex + 1;
+      if (target.closest('.designs-nav__item')) {
+        slideIdex = 0;
+        counterCurrent.textContent = 1;
+        slide.style.transform = `translateY(-${designsSliderStyleItem[0].clientHeight * slideIdex}px)`;
+      }
     });
   };
 
@@ -56,9 +87,7 @@ const showDesign = () => {
       });
     }
     if (target.closest('.link-list-designs a')) {
-      popupDialogDesign.style.visibility = 'visible';
-    } else {
-      popupDialogDesign.style.visibility = '';
+      popupDesign.style.visibility = 'visible';
     }
   });
 

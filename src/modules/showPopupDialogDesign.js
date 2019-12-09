@@ -33,13 +33,22 @@ const popupDialogDesign = () => {
       }
       sliderCounterContentCurrent.textContent = slideIdex + 1;
       slider.style.transform = `translateY(-${designBlockItem[0].clientHeight * slideIdex}px)`;
-      
+      if (target.closest('.designs-nav__item_popup')) {
+        slideIdex = 0;
+        slider.style.transform = `translateY(-${designBlockItem[0].clientHeight * slideIdex}px)`;
+        sliderCounterContentCurrent.textContent = slideIdex + 1;
+      }
     });
+    
   };
   showDesignBlock(popupDesignSlider);
 
   popupDesign.addEventListener('click', (event) => {
     let target = event.target;
+
+    if (target.closest('.close')) {
+      popupDesign.style.visibility = '';
+    }
 
     if (target.closest('.designs-nav__item_popup')) {
       designsNavItemPopup.forEach((item, index) => {
