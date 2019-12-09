@@ -6481,3 +6481,9 @@ strong {
 
 .slider-dots {
   display: none; }
+  .formula-item-popup-Rotated {
+    transform: translateY(5px);
+    padding-top: 35px;
+    top: 155px;
+}
+

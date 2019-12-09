@@ -1,27 +1,47 @@
 const sliderPortfolio = () => {
   const portfolio = document.getElementById('portfolio'),
-  portfolioIdSliderWrap = document.getElementById('portfolioIdSliderWrap'),
   portfolioSlider = document.querySelector('.portfolio-slider'),
   portfolioSliderSlide = document.querySelectorAll('.portfolio-slider__slide'),
   arrowLeft = document.getElementById('portfolio-arrow_left'),
   arrowRight = document.getElementById('portfolio-arrow_right');
 
-  let sliideIndex = 0;
-  arrowLeft.style.display = 'block';
-  portfolioIdSliderWrap.style.overflow = 'hidden';
-  portfolioIdSliderWrap.style.borderRadius = '20px';
-  portfolioSlider.style.overflow = 'visible';
+  let slideIndex = 0;
   portfolioSlider.style.transition = 'transform 0.5s';
 
   portfolio.addEventListener('click', (event) => {
     let target = event.target;
+   
+      if (target.closest('#portfolio-arrow_right')) {
+        slideIndex++;
+        for (let i = 0; i < portfolioSliderSlide.length; i++) {
+          portfolioSliderSlide[i].style.transform = `translateX(-${portfolioSliderSlide[0].clientWidth * slideIndex}px)`;
+        }
+      }
+      if (target.closest('#portfolio-arrow_left')) {
+        slideIndex--;
+        for (let i = 0; i < portfolioSliderSlide.length; i++) {
+          portfolioSliderSlide[i].style.transform = `translateX(-${portfolioSliderSlide[0].clientWidth * slideIndex}px)`;
+        }
+      
+      }
+      if (document.documentElement.clientWidth - portfolioSliderSlide[4].getBoundingClientRect().right < 100) {
+        arrowRight.style.display = 'block';
+      } else {
+        arrowRight.style.display = 'none';
+      }
+      portfolioSliderSlide[4].getBoundingClientRect();
+      if (slideIndex > 0) {
+        arrowLeft.style.display = 'block';
+      } else {
+        arrowLeft.style.display = 'none';
+      }
 
-    if (target.closest('#portfolio-arrow_right')) {
-      sliideIndex++;
-      portfolioSlider.style.transform = `translateX(-${portfolioSliderSlide[0].clientWidth * sliideIndex}px)`;
-    }
+    
   });
  
+
+
+
   // popup dialog portfolio
   const popupDialogPortfolio = document.querySelector('.popup-portfolio'),
   portfolioSliderSlideFrame = document.querySelectorAll('.portfolio-slider__slide-frame'),//фотки до всплытия окна
@@ -68,10 +88,12 @@ const sliderPortfolio = () => {
   portfolio.addEventListener('click', (event) => {
     let target = event.target;
 
-    for (let i = 0; i < portfolioSliderSlideFrame.length; i++) {
-      if (target === portfolioSliderSlideFrame[i]) {
-        popupDialogPortfolio.style.visibility = 'visible';
-        popupShowDialogWindow(i - 10);
+    if (document.documentElement.clientWidth > 1020) {
+      for (let i = 0; i < portfolioSliderSlideFrame.length; i++) {
+        if (target === portfolioSliderSlideFrame[i]) {
+          popupDialogPortfolio.style.visibility = 'visible';
+          popupShowDialogWindow(i - 10);
+        }
       }
     }
   });

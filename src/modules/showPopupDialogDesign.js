@@ -35,8 +35,6 @@ const popupDialogDesign = () => {
       slider.style.transform = `translateY(-${designBlockItem[0].clientHeight * slideIdex}px)`;
       
     });
-    
-
   };
   showDesignBlock(popupDesignSlider);
 
