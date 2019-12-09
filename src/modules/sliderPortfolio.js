@@ -24,14 +24,14 @@ const sliderPortfolio = () => {
         }
       
       }
-      if (document.documentElement.clientWidth - portfolioSliderSlide[4].getBoundingClientRect().right < 100) {
-        arrowRight.style.display = 'block';
+      if (document.documentElement.clientWidth - portfolioSliderSlide[4].getBoundingClientRect().right < -250) {
+        arrowRight.style.display = 'flex';
       } else {
         arrowRight.style.display = 'none';
       }
       portfolioSliderSlide[4].getBoundingClientRect();
       if (slideIndex > 0) {
-        arrowLeft.style.display = 'block';
+        arrowLeft.style.display = 'flex';
       } else {
         arrowLeft.style.display = 'none';
       }
@@ -52,13 +52,29 @@ const sliderPortfolio = () => {
   sliderCounterContentTotal = popupDialogPortfolio.querySelector('.slider-counter-content__total'),//Весь счётчик
   arrowPopupLeft = document.getElementById('popup_portfolio_left'),
   arrowPopupRight = document.getElementById('popup_portfolio_right'),
-  popupPortfolioCounter = document.getElementById('popup-portfolio-counter');//Счётчик
+  popupPortfolioCounter = document.getElementById('popup-portfolio-counter'),//Счётчик
+  counterMobileCurrent = portfolio.querySelector('.slider-counter-content__current'),
+  counterMobileTotal = portfolio.querySelector('.slider-counter-content__total'),
+  arrowLeftMobile = document.getElementById('portfolio-arrow-mobile_left'),
+  arrowRightMobile = document.getElementById('portfolio-arrow-mobile_right'),
+  portfolioSliderMobile = document.querySelector('.portfolio-slider-mobile'),
+  mobileSlideFrame = portfolioSliderMobile.querySelectorAll('.portfolio-slider__slide-frame');
 
   let indexMainPopup = 0;
+  let mobileIndex = 0;
   sliderCounterContentTotal.textContent = popupPortfolioText.length;
+  counterMobileTotal.textContent = mobileSlideFrame.length;
+  arrowLeftMobile.style.zIndex = 20;
+  arrowRightMobile.style.zIndex = 20;
   arrowPopupLeft.style.top = '5%';
   arrowPopupRight.style.top = '5%';
   popupPortfolioCounter.style.top = '8%';
+  for (let i = 0; i < portfolioSliderSlide.length; i++) {
+    portfolioSliderSlide[i].style.transition = 'transform 0.5s';
+  }
+  for (let i = 0; i < mobileSlideFrame.length; i++) {
+    mobileSlideFrame[i].style.transition = 'transform 0.5s';
+  }
   popupPortfolioSlider.style.transition = 'transform 0.5s';
 
   window.addEventListener('resize', () => {
@@ -87,7 +103,6 @@ const sliderPortfolio = () => {
 
   portfolio.addEventListener('click', (event) => {
     let target = event.target;
-
     if (document.documentElement.clientWidth > 1020) {
       for (let i = 0; i < portfolioSliderSlideFrame.length; i++) {
         if (target === portfolioSliderSlideFrame[i]) {
@@ -96,7 +111,28 @@ const sliderPortfolio = () => {
         }
       }
     }
+    //mobile arrow
+    if (target.closest('#portfolio-arrow-mobile_left')) {
+      mobileIndex--;
+      if (mobileIndex < 0) {
+        mobileIndex = 0;
+      }
+      for (let i = 0; i < mobileSlideFrame.length; i++) {
+        mobileSlideFrame[i].style.transform = `translateY(-${mobileSlideFrame[0].clientHeight * mobileIndex}px)`;
+      }
+    }
+    if (target.closest('#portfolio-arrow-mobile_right')) {
+      mobileIndex++;
+      if (mobileIndex > mobileSlideFrame.length - 1) {
+        mobileIndex = mobileSlideFrame.length - 1;
+    }
+      for (let i = 0; i < mobileSlideFrame.length; i++) {
+        mobileSlideFrame[i].style.transform = `translateY(-${mobileSlideFrame[0].clientHeight * mobileIndex}px)`;
+      }
+    }
+    counterMobileCurrent.textContent = mobileIndex + 1;
   });
+
   popupDialogPortfolio.addEventListener('click', (event) => {
     let target = event.target;
 
@@ -123,7 +159,9 @@ const sliderPortfolio = () => {
       popupPortfolioText[i].style.display = 'none';
     }
     popupPortfolioText[indexMainPopup].style.display = 'block';
-    
   });
+
+  //mobile
+  
 };
 export default sliderPortfolio;
