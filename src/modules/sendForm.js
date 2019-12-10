@@ -1,17 +1,17 @@
 const sendForm = () => {
-
+  const popupThank = document.querySelector('.popup-thank'),
+  closeThank = popupThank.querySelector('.close-thank');
+  closeThank.addEventListener('click', () => {
+    popupThank.style.visibility = 'hidden';
+  });
   const sendFeedback = (feedback) => {
-    const errorMessage = 'Произошла ошибка, данные не отправлены!',
-  succesMessage = 'Спасибо! Мы скоро с вами свяжемся!',
-  inputs = feedback.querySelectorAll('input'),
-  statusMessage = document.createElement('div');
-  const divMessage = document.createElement('div');
 
   feedback.addEventListener('submit', (event) => {
     event.preventDefault();
-    statusMessage.remove();
-    feedback.appendChild(divMessage);
-
+    const check = feedback.querySelector('.checkbox__input');
+    if (check.checked === false) {
+      return;
+    }
     const formData = new FormData(feedback);
     let body = {};
 
@@ -27,34 +27,24 @@ const sendForm = () => {
         body: JSON.stringify(body)
       });
     };
-
   postData(body)
     .then((response) => {
       if ( response.status !== 200 ) {
-        throw new Error(errorMessage);
+        throw new Error('ошибка');
       }
-      divMessage.remove(); 
-      feedback.appendChild(statusMessage);
-      statusMessage.textContent = succesMessage;
       feedback.reset();
-
-      inputs.forEach((item) => {
-        item.classList.remove('success');
-      });
+      setTimeout(() => {
+        popupThank.style.visibility = 'visible';
+        }, 1000);
     })
     .catch((error) => {
-
-      divMessage.remove();
-      feedback.appendChild(statusMessage);
-      statusMessage.textContent = errorMessage;
+      feedback.reset();
       console.error(error);
     });
   });
   };
-  
   for (let i = 1; i < 7; i++) {
     const feedback = document.getElementById('feedback' + i);
-  
     sendFeedback(feedback);
   }
 };
