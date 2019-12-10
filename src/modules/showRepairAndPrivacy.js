@@ -8,6 +8,12 @@ const showRepairAndPrivacy = () => {
     }
     if (target.closest(btnClose)) {
       types.style.visibility = '';
+      const itemNav = document.querySelectorAll('.popup-repair-types-nav__item'),
+      tableItem = document.querySelectorAll('.popup-repair-types-content-table__list');
+      for (let i = 0; i < itemNav.length; i ++) {
+        itemNav[i].remove();
+        tableItem[i].remove();
+      }
     }
   };
 

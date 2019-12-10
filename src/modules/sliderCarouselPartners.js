@@ -35,11 +35,5 @@ const sliderCarouselPartners = () => {
     });
   };
   carousel();
-
-  window.addEventListener('resize', ()=> {
-    if (document.documentElement.clientWidth < 769) {
-    }
-  });
-
 };
 export default sliderCarouselPartners;
