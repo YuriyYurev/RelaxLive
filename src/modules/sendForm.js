@@ -5,13 +5,31 @@ const sendForm = () => {
     popupThank.style.visibility = 'hidden';
   });
   const sendFeedback = (feedback) => {
-
+    let divWatched = document.createElement('div');
+        divWatched.style.cssText = `
+          text-align: center;
+          color: #fead16;
+          font-size: 15px;
+          
+        `;
   feedback.addEventListener('submit', (event) => {
     event.preventDefault();
+    feedback.appendChild(divWatched);
+    let input = feedback.querySelectorAll('input');
+    for (let i = 0; i < input.length; i++) {
+      if (input[i].name === 'phone') {
+        if (input[i].value < 18) {
+          divWatched.textContent = 'Поле не заполнено!';
+          return;
+        }
+      }
+    }
     const check = feedback.querySelector('.checkbox__input');
     if (check.checked === false) {
+      divWatched.textContent = 'Чекбокс не отмечен!';
       return;
     }
+    divWatched.remove();
     const formData = new FormData(feedback);
     let body = {};
 

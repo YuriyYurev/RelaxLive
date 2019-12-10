@@ -1,13 +1,12 @@
 const popupRepairTypes = () => {
   const navListPopupRepair = document.querySelector('.nav-list-popup-repair'),
-  popupRepairTypesContent = document.querySelector('.popup-repair-types-content'),
   propupReapirTypeContentTable = document.querySelector('.popup-repair-types-content-table'),
   switchInner = document.getElementById('switch-inner');
 
 
   document.body.addEventListener(`click`, (event) => {
     let target = event.target;
-    if ( target.closest(`.no-overflow`) || target.closest(`.link-list-repair`) ) {
+    if ( target.closest('.no-overflow') || target.closest('.link-list-repair') ) {
 
       const postData = () => fetch(`./db/db.json`); 
       postData()
@@ -18,7 +17,7 @@ const popupRepairTypes = () => {
           response.json()
         .then(data => {
           
-          data.forEach((item, index) => {
+          data.forEach((item) => {
             //Табы
             const divItemTab = document.createElement('button');
             divItemTab.classList.add('button_o', 'popup-repair-types-nav__item');

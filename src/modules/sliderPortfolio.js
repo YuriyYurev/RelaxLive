@@ -39,9 +39,6 @@ const sliderPortfolio = () => {
     
   });
  
-
-
-
   // popup dialog portfolio
   const popupDialogPortfolio = document.querySelector('.popup-portfolio'),
   portfolioSliderSlideFrame = document.querySelectorAll('.portfolio-slider__slide-frame'),//фотки до всплытия окна
@@ -136,7 +133,7 @@ const sliderPortfolio = () => {
   popupDialogPortfolio.addEventListener('click', (event) => {
     let target = event.target;
 
-    if (target.closest('.close')) {
+    if (target.closest('.close') || !target.closest('.popup-dialog-portfolio')) {
       popupDialogPortfolio.style.visibility = '';
     }
 

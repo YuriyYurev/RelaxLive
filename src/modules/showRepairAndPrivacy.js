@@ -22,7 +22,17 @@ const showRepairAndPrivacy = () => {
     showType('.link-list', popupRepairTypes, '.close', target);
     showType('.link-privacy', popupPrivacy, '.close', target);
   });
-  
+  popupRepairTypes.addEventListener('click', (event) => {
+    if (!event.target.closest('.popup-dialog-repair-types')) {
+      popupRepairTypes.style.visibility = '';
+      const itemNav = document.querySelectorAll('.popup-repair-types-nav__item'),
+      tableItem = document.querySelectorAll('.popup-repair-types-content-table__list');
+      for (let i = 0; i < itemNav.length; i ++) {
+        itemNav[i].remove();
+        tableItem[i].remove();
+      }
+    }
+  });
 };
 
 export default showRepairAndPrivacy;

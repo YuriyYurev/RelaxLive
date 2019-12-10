@@ -46,7 +46,7 @@ const popupDialogDesign = () => {
   popupDesign.addEventListener('click', (event) => {
     let target = event.target;
 
-    if (target.closest('.close')) {
+    if (target.closest('.close') || !target.closest('.popup-dialog-design')) {
       popupDesign.style.visibility = '';
     }
 

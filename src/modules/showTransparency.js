@@ -5,7 +5,6 @@ const showTransparency = () => {
   popupTransparencySliderSlide = document.querySelectorAll('.popup-transparency-slider__slide'),
   sliderCounterContentCurrent = popupTransparency.querySelector('.slider-counter-content__current'),
   sliderCounterContentTCotal = popupTransparency.querySelector('.slider-counter-content__total'),
-  transparencySlider = transparency.querySelector('.transparency-slider'),
   transparencyItem = transparency.querySelectorAll('.transparency-item'),
   leftArrow = document.getElementById('transparency-arrow_left'),
   rightArrow = document.getElementById('transparency-arrow_right');
@@ -64,7 +63,7 @@ const showTransparency = () => {
         }
       }
 
-      if (target.closest('.close')) {
+      if (target.closest('.close') || !target.closest('#transparency_right') && !target.closest('#transparency_left') && !target.closest('.popup-dialog-transparency')) {
         popupTransparency.style.visibility = '';
       }
       sliderCounterContentCurrent.textContent = slideIndex + 1;
@@ -97,6 +96,6 @@ const showTransparency = () => {
     }
     hideTransparencyItem(slideIndex);
   });
-  
+
 };
 export default showTransparency;

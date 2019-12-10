@@ -3,11 +3,14 @@ const getConsultation = () => {
 
   document.body.addEventListener('click', (event) => {
     let target = event.target;
-
     if (target.closest('.button_wide')) {
       popupConsultation.style.visibility = 'visible';
     }
-    if (target.closest('.close-consultation')) {
+
+  });
+  popupConsultation.addEventListener('click', (event) => {
+    let target = event.target;
+    if (target.closest('.close-consultation') || !target.closest('.feedback-wrap')) {
       popupConsultation.style.visibility = '';
     }
   });
